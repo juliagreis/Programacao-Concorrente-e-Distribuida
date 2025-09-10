@@ -34,7 +34,6 @@ int cont=0;
 
 std::mutex m;
 
-
 void correr(int id,int num_voltas,int num_etapas,int num_corredores,std::barrier<> &b){ //meu c++ ta pedindo <> 
 
     //inicializando maps
@@ -63,8 +62,9 @@ void correr(int id,int num_voltas,int num_etapas,int num_corredores,std::barrier
             map_pontuacao_id[std::this_thread::get_id()]+=minha_pontuacao;
 
             m.unlock();
-            
-            //espera todas as threads terminarem a volta
+
+        }
+        //espera todas as threads terminarem a etapa
             b.arrive_and_wait();
 
             m.lock();
@@ -72,8 +72,6 @@ void correr(int id,int num_voltas,int num_etapas,int num_corredores,std::barrier
             m.unlock();
 
             b.arrive_and_wait(); //pra ninguem sair na frente para a proxima etapa e alterar cont simultaneamente
-
-        }
     }
 }
 
