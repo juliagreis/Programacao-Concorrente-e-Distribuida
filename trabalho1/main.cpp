@@ -50,9 +50,8 @@ void correr(int id,int num_voltas,int num_etapas,int num_corredores,std::barrier
         for (int volta = 0; volta < num_voltas; volta++){
 
             // Simula o tempo de corrida
-            for (int i = 0; i < 100; i++) { //pra gerar mais concorrencia
                 std::this_thread::yield();
-            }
+            
             
             // registrar a ordem de chegada dessa volta
             m.lock();
